@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className="h-full flex flex-col bg-secondary">
       <SearchNav search={search} setSearch={setSearch} border={true} />
-      <div className="bg-black opacity-90  h-[80vh] flex flex-col py-16">
+      <div className="bg-black opacity-90  h-[85vh] flex flex-col py-16">
         <h1 className="text-primary text-6xl my-auto px-8">
           The Best Premium Blogging Platform on Internet
         </h1>
