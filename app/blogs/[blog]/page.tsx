@@ -1,5 +1,6 @@
 "use client";
 import Nav from "@/components/Nav";
+import Preview from "@/components/markdowneditor/Preview";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -32,7 +33,7 @@ function Page() {
           {Date(blog?.time).toString().split("GMT")[0]}
         </h2>
         <h2 className="text-secondary">- {user?.name}</h2>
-        <h2 className="text-primary pt-2">{blog?.content}</h2>
+        <Preview doc={blog?.content}></Preview>
       </div>
     </div>
   );
