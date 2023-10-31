@@ -20,6 +20,7 @@ const walletSchema = new mongoose.Schema({
   },
   history: {
     type: [historySchema],
+    default: [],
   },
 });
 
@@ -36,7 +37,7 @@ const userSchema = new mongoose.Schema({
     default: [],
   },
   wallet: {
-    type: [walletSchema],
+    type: walletSchema,
     sparse: true,
     default: [],
   },

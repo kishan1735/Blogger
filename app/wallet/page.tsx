@@ -6,21 +6,22 @@ function Page() {
   const { data: session, status } = useSession();
   console.log(session);
   return (
-    <div className="h-screen flex flex-col items-center space-y-16 bg-secondary">
+    <div className="h-screen flex flex-col items-center space-y-16 bg-secondary ">
       <Nav />
-      <div className="bg-black opacity-90 flex">
-        <div className="flex flex-col px-8 py-6 space-y-8">
-          <h1 className="text-primary text-4xl uppercase">Your wallet</h1>
-          <div className="flex space-x-16">
-            <h1 className="text-primary text-xl">Name</h1>
-            <h1 className="text-secondary text-xl">{session?.user?.name}</h1>
-          </div>
-          <div className="flex space-x-16">
-            <h1 className="text-primary text-3xl uppercase ">Your Balance</h1>
-            <h1 className="text-secondary text-xl">"Balance"</h1>
-          </div>
+
+      <div className=" bg-black w-[50vw] opacity-90 flex-col px-8  py-6 space-y-8">
+        <h1 className="text-accent text-4xl">Your Wallet</h1>
+        <div className="flex space-x-16">
+          <h1 className="text-primary text-3xl">Name</h1>
+          <h1 className="text-secondary text-3xl">{session?.user?.name}</h1>
         </div>
-        <div className="flex flex-col"></div>
+        <div className="flex space-x-16">
+          <h1 className="text-primary text-3xl">Your Balance</h1>
+          <h1 className="text-secondary text-3xl">0</h1>
+        </div>
+        <button className="bg-primary text-black border-2 border-black text-2xl mx-auto px-4 py-2 hover:bg-black hover:text-primary hover:border-primary">
+          Add To Your Wallet
+        </button>
       </div>
     </div>
   );

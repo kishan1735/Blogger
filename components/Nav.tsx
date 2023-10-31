@@ -14,19 +14,19 @@ function Nav() {
       </Link>
       <div className="flex items-center space-x-4">
         <Link href="/createblog" className=" group text-primary">
-          <h1 className="text-xl">Create Blog</h1>
+          <h1 className="text-2xl">Create Blog</h1>
           <div className="mx-2 group-hover:border-b-2 group-hover:border-primary"></div>
         </Link>
         <Link href="/blogs" className=" group text-primary">
-          <h1 className="text-xl">View Blogs</h1>
+          <h1 className="text-2xl">View Blogs</h1>
           <div className="mx-2 group-hover:border-b-2 group-hover:border-primary"></div>
         </Link>
         <Link href="/wallet" className=" group text-primary">
-          <h1 className="text-xl">Wallet</h1>
+          <h1 className="text-2xl">Wallet</h1>
           <div className="mx-2 group-hover:border-b-2 group-hover:border-primary"></div>
         </Link>
         <Link href="/profile" className=" group text-primary">
-          <h1 className="text-xl">Profile</h1>
+          <h1 className="text-2xl">Profile</h1>
           <div className="mx-2 group-hover:border-b-2 group-hover:border-primary"></div>
         </Link>
         {status !== "authenticated" ? (

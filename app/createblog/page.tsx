@@ -21,23 +21,23 @@ function Page() {
     }
   }
   return (
-    <div className="h-full w-screen bg-secondary flex flex-col space-y-6 w-screen pb-2">
+    <div className="h-full  bg-secondary flex flex-col space-y-6 w-screen pb-2">
       <Nav />
-      <div className="bg-black flex flex-col space-y-4 px-8 py-8 h-[100vh] opacity-90 mx-[30vh]">
-        <h1 className="text-accent text-2xl text-center uppercase">
+      <div className="bg-black flex flex-col space-y-8 px-8 py-8 h-full opacity-90 mx-[30vh]">
+        <h1 className="text-accent text-4xl text-center uppercase">
           Create Blog
         </h1>
         <div className="flex space-x-6 justify-center">
-          <h1 className="text-primary text-xl">Name</h1>
+          <h1 className="text-primary text-2xl">Name</h1>
           <input
             type="text"
-            className="bg-secondary px-8"
+            className="bg-secondary px-10"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="flex flex-col space-y-2">
-          <h1 className="text-accent text-xl text-center">Content</h1>
+          <h1 className="text-accent text-3xl text-center">Content</h1>
           <textarea
             className="bg-secondary px-8 h-[50vh] w-120  py-2"
             value={text}
@@ -45,7 +45,7 @@ function Page() {
           />
         </div>
         <button
-          className="bg-primary mx-72 py-2 border-black border-2 hover:bg-black hover:border-primary hover:text-primary"
+          className="bg-primary mx-auto py-4 text-2xl w-[20vw] border-black border-2 hover:bg-black hover:border-primary hover:text-primary"
           onClick={handleClick}
         >
           Submit
