@@ -40,8 +40,8 @@ function SearchNav({
           <h1 className="text-xl">View Blogs</h1>
           <div className="mx-2 group-hover:border-b-2 group-hover:border-primary"></div>
         </Link>
-        <Link href="/plans" className=" group text-primary">
-          <h1 className="text-xl">Plans</h1>
+        <Link href="/wallet" className=" group text-primary">
+          <h1 className="text-xl">Wallet</h1>
           <div className="mx-2 group-hover:border-b-2 group-hover:border-primary"></div>
         </Link>
         <Link href="/profile" className=" group text-primary">

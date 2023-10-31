@@ -4,7 +4,24 @@ interface UserType extends mongoose.Document {
   name: string;
   email: string;
   blogs: Array<String>;
+  wallet: Array<Object>;
 }
+
+const historySchema = new mongoose.Schema({
+  to: { type: String, required: true },
+  from: { type: String, required: true },
+  amount: { type: Number, required: true },
+  time: { type: Date, default: Date.now() },
+});
+const walletSchema = new mongoose.Schema({
+  total: {
+    type: Number,
+    default: 0,
+  },
+  history: {
+    type: [historySchema],
+  },
+});
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -15,6 +32,11 @@ const userSchema = new mongoose.Schema({
   },
   blogs: {
     type: [String],
+    sparse: true,
+    default: [],
+  },
+  wallet: {
+    type: [walletSchema],
     sparse: true,
     default: [],
   },

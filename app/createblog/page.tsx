@@ -21,9 +21,9 @@ function Page() {
     }
   }
   return (
-    <div className="h-full w-screen bg-secondary flex flex-col space-y-6 w-screenpb-2">
+    <div className="h-full w-screen bg-secondary flex flex-col space-y-6 w-screen pb-2">
       <Nav />
-      <div className="bg-black flex flex-col space-y-4 px-8 py-8 opacity-90 mx-60">
+      <div className="bg-black flex flex-col space-y-4 px-8 py-8 h-[100vh] opacity-90 mx-[30vh]">
         <h1 className="text-accent text-2xl text-center uppercase">
           Create Blog
         </h1>
@@ -39,7 +39,7 @@ function Page() {
         <div className="flex flex-col space-y-2">
           <h1 className="text-accent text-xl text-center">Content</h1>
           <textarea
-            className="bg-secondary px-8 h-64 w-120  py-2"
+            className="bg-secondary px-8 h-[50vh] w-120  py-2"
             value={text}
             onChange={(e) => setText(e.target.value)}
           />

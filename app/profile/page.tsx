@@ -1,6 +1,6 @@
 import Nav from "@/components/Nav";
 
-function Page() {
+function Wallet() {
   return (
     <div className="h-screen bg-secondary">
       <Nav />
@@ -8,4 +8,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default Wallet;
