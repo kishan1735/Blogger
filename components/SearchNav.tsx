@@ -14,7 +14,7 @@ function SearchNav({
   const { data: session, status } = useSession();
   return (
     <nav
-      className={`max-w-kxl px-6 py-4 h-[15vh] bg-black flex justify-between opacity-90 items-center ${
+      className={`max-w-kxl px-[6vh] py-[4vh]  bg-black flex justify-between opacity-90 items-center ${
         border ? "border-b-2 border-b-primary" : ""
       }`}
     >
