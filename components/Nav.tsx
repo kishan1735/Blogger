@@ -37,7 +37,7 @@ function Nav() {
             onClick={() =>
               signIn(
                 "google",
-                { callbackUrl: "http://localhost:3000" },
+                { callbackUrl: `${process.env.URL}` },
                 { prompt: "login" }
               )
             }

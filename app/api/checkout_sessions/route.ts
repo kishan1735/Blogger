@@ -34,8 +34,8 @@ async function getCheckoutSession(req: Request): Promise<any> {
       ],
       client_reference_id: user?._id,
       currency: "inr",
-      success_url: `http://localhost:3000/api/wallet/${data.amount.toString()}`,
-      cancel_url: `http://localhost:3000/wallet`,
+      success_url: `${process.env.URL}/api/wallet/${data.amount.toString()}`,
+      cancel_url: `${process.env.URL}/wallet`,
     };
     const checkoutSession: Stripe.Checkout.Session =
       await stripe.checkout.sessions.create(params);

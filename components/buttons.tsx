@@ -9,7 +9,7 @@ export function SignInButton({ children }: { children: React.ReactNode }) {
       onClick={() =>
         signIn(
           "google",
-          { callbackUrl: "http://localhost:3000" },
+          { callbackUrl: `${process.env.URL}` },
           { prompt: "login" }
         )
       }

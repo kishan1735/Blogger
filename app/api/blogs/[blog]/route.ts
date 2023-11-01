@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import connectMongoDB from "@/lib/dbConnect";
 
-export async function GetHandler(req: Request, { params }: { params: any }) {
+async function GetHandler(req: Request, { params }: { params: any }) {
   try {
     await connectMongoDB();
     const session = await getServerSession(authOptions);

@@ -28,7 +28,7 @@ async function createPayCheckout(req: Request, { params }: { params: any }) {
         },
       },
     });
-    return NextResponse.redirect("http://localhost:3000/wallet");
+    return NextResponse.redirect(`${process.env.URL}/wallet`);
   } catch (err: any) {
     return NextResponse.json({ status: "failed", message: err.message });
   }
