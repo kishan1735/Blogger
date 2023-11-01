@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [search, setSearch] = useState("");
+  console.log(process.env.URL);
   return (
     <main className="max-w-kxl h-full flex flex-col bg-black opacity-[85%] w-screen">
       <Nav />
