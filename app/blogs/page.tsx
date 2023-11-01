@@ -1,5 +1,6 @@
 "use client";
 import AuthCheck from "@/components/AuthCheck";
+import ComponentLoading from "@/components/ComponentLoading";
 import Loading from "@/components/Loading";
 import Nav from "@/components/Nav";
 import SearchNav from "@/components/SearchNav";
@@ -24,29 +25,31 @@ function Page() {
           body: JSON.stringify(requestBody),
         });
         const resData = await res.json();
-        setLoading(false);
-        if (resData.status === "success") setData(resData.blogs);
-        else setError(resData.message);
+
+        if (resData.status === "success") {
+          setLoading(false);
+          setData(resData.blogs);
+        } else setError(resData.message);
       }
       getAllBlogs();
     },
     [search]
   );
+
   return (
     <AuthCheck>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div
-          className={`${
-            data.length <= 8 ? "h-screen" : "h-full"
-          } bg-black opacity-[85%] flex flex-col space-y-4`}
-        >
-          <SearchNav search={search} setSearch={setSearch} border={true} />
-
-          <div className="grid grid-cols-4 gap-4 p-2">
-            <h1 className="text-primary text-lg text-center">{error}</h1>
-            {data?.map((el: any) => {
+      <div
+        className={`${
+          data.length <= 8 ? "h-screen" : "h-full"
+        } bg-black opacity-[85%] flex flex-col space-y-4`}
+      >
+        <SearchNav search={search} setSearch={setSearch} border={true} />
+        <h1 className="text-primary text-lg text-center">{error}</h1>
+        <div className="grid grid-cols-4 gap-4 p-2">
+          {loading ? (
+            <ComponentLoading />
+          ) : (
+            data?.map((el: any) => {
               return (
                 <div
                   className="bg-black border-2 border-primary px-2 py-4 flex flex-col space-y-2 hover:scale-105 cursor-pointer"
@@ -60,7 +63,9 @@ function Page() {
                   </h1>
 
                   <h1 className="text-accent text-sm text-center">
-                    {el.time.toString().split("G")[0]}
+                    {new Date(el.time).toDateString() +
+                      " " +
+                      new Date(el.time).toTimeString().split("GMT")[0]}
                   </h1>
                   <h1 className="text-secondary text-sm text-center">
                     {el.content.substring(0, 60)}
@@ -76,10 +81,10 @@ function Page() {
                   </h1>
                 </div>
               );
-            })}
-          </div>
+            })
+          )}
         </div>
-      )}
+      </div>
     </AuthCheck>
   );
 }

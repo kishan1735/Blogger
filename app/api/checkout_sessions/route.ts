@@ -9,9 +9,10 @@ const cors = Cors({
 });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-async function getCheckoutSession(req: Request) {
+async function getCheckoutSession(req: Request): Promise<any> {
   try {
     const session = await getServerSession();
+    const data = await req.json();
     const user: any = User.findOne({ email: session?.user?.email });
     if (!user) {
       throw new Error("User not found...Login for access");
@@ -26,14 +27,14 @@ async function getCheckoutSession(req: Request) {
               name: "Wallet Payment",
             },
             currency: "inr",
-            unit_amount: 50000,
+            unit_amount: data.amount * 100,
           },
           quantity: 1,
         },
       ],
       client_reference_id: user?._id,
       currency: "inr",
-      success_url: `http://localhost:3000/api/wallet`,
+      success_url: `http://localhost:3000/api/wallet/${data.amount.toString()}`,
       cancel_url: `http://localhost:3000/wallet`,
     };
     const checkoutSession: Stripe.Checkout.Session =
@@ -45,4 +46,4 @@ async function getCheckoutSession(req: Request) {
   }
 }
 
-export { getCheckoutSession as GET };
+export { getCheckoutSession as POST };

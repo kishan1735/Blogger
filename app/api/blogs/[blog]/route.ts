@@ -9,12 +9,20 @@ export async function GetHandler(req: Request, { params }: { params: any }) {
   try {
     await connectMongoDB();
     const session = await getServerSession(authOptions);
-    const blog = await Blog.findById(params.blog);
+    let blog = await Blog.findById(params.blog);
     if (!blog) {
       throw new Error("Blog Not Found");
     }
     const author = await User.findById(blog.publisher.toString());
     const user = await User.findOne({ email: session?.user?.email });
+    blog = await Blog.findByIdAndUpdate(params.blog, {
+      $push: {
+        views: {
+          id: user._id,
+          time: Date.now(),
+        },
+      },
+    });
     if (!user) {
       throw new Error("User not found");
     }

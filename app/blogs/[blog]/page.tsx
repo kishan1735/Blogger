@@ -71,9 +71,7 @@ function Page() {
           {purchased ? (
             <div className="bg-black py-8 px-16 flex flex-col items-center space-y-4 w-[50vw] mx-28">
               <h1 className="text-primary text-4xl">{blog?.name}</h1>
-              <h2 className="text-secondary">
-                {blog?.time.toString().split("GMT")[0]}
-              </h2>
+              <h2 className="text-secondary">{blog?.time}</h2>
               <h2 className="text-primary text-2xl">- {author?.name}</h2>
               <h1 className="text-primary text-lg text-center">{error}</h1>
               <Preview doc={blog?.content}></Preview>

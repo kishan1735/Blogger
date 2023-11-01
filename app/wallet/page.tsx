@@ -11,6 +11,7 @@ function Page() {
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(false);
   const [err, setError] = useState("");
+  const [amount, setAmount] = useState("");
   useEffect(function () {
     async function getUser() {
       setLoading(true);
@@ -29,9 +30,13 @@ function Page() {
     getUser();
   }, []);
   async function handleWallet() {
+    setError("");
     setLoading(true);
+    const requestBody = { amount: +amount };
     const res = await fetch("/api/checkout_sessions", {
+      method: "POST",
       headers: { "Content-type": "application/json" },
+      body: JSON.stringify(requestBody),
     });
     const data = await res.json();
     setLoading(false);
@@ -62,12 +67,21 @@ function Page() {
               <h1 className="text-primary text-3xl">Wallet Balance</h1>
               <h1 className="text-secondary text-3xl">{data?.walletBalance}</h1>
             </div>
-            <button
-              className="bg-primary text-black border-2 border-black text-2xl mx-auto px-4 py-2 hover:bg-black hover:text-primary hover:border-primary"
-              onClick={handleWallet}
-            >
-              Add To Your Wallet
-            </button>
+            <div className="flex justidy-between">
+              <input
+                type="text"
+                className="bg-secondary rounded-xl text-xl text-center"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
+              <button
+                className="bg-primary text-black border-2 border-black text-2xl mx-auto px-4 py-2 hover:bg-black hover:text-primary hover:border-primary"
+                onClick={handleWallet}
+              >
+                Add To Your Wallet
+              </button>
+            </div>
+
             <h1 className="text-primary text-lg text-center">{err}</h1>
           </div>
         </div>

@@ -1,11 +1,11 @@
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "../../auth/[...nextauth]/route";
 import Pay from "@/models/payModel";
 import User from "@/models/userModel";
 import { NextApiRequest } from "next";
 
-async function createPayCheckout(req: any, res: Response) {
+async function createPayCheckout(req: Request, { params }: { params: any }) {
   try {
     const session = await getServerSession(authOptions);
     let user = await User.findOne({ email: session?.user?.email });
@@ -18,12 +18,12 @@ async function createPayCheckout(req: any, res: Response) {
       time: Date.now(),
     });
     await User.findByIdAndUpdate(user._id, {
-      walletBalance: user.walletBalance + 500,
+      walletBalance: user.walletBalance + Number(params.amount),
 
       $push: {
         transactionHistory: {
           for: "wallet",
-          amount: 500,
+          amount: +params.amount,
           time: Date.now(),
         },
       },
