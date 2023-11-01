@@ -15,7 +15,7 @@ interface Props {
 const Preview = (props: Props) => {
   return (
     <div
-      className=" h-[80vh] w-[40vw] px-4 preview border-4 p-4 opacity-90 bg-secondary  border-primary markdown-body "
+      className=" h-[80vh] w-[50vw] px-6 preview border-4 p-4 opacity-90 bg-secondary  border-primary markdown-body "
       style={{ backgroundColor: "#fff5d6", color: "black" }}
     >
       <ReactMarkdown

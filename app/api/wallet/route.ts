@@ -19,8 +19,10 @@ async function createPayCheckout(req: any, res: Response) {
     });
     await User.findByIdAndUpdate(user._id, {
       walletBalance: user.walletBalance + 500,
+
       $push: {
         transactionHistory: {
+          for: "wallet",
           amount: 500,
           time: Date.now(),
         },

@@ -11,6 +11,7 @@ interface UserType extends mongoose.Document {
 const historySchema = new mongoose.Schema({
   amount: { type: Number },
   time: { type: Date, default: Date.now() },
+  for: { type: String },
 });
 
 const userSchema = new mongoose.Schema({
