@@ -6,6 +6,7 @@ interface UserType extends mongoose.Document {
   blogs: Array<String>;
   transactionHistory: Array<Object>;
   walletBalance: number;
+  purchased: Array<String>;
 }
 
 const historySchema = new mongoose.Schema({
@@ -29,6 +30,11 @@ const userSchema = new mongoose.Schema({
   walletBalance: { type: Number, default: 0 },
   transactionHistory: {
     type: [historySchema],
+    default: [],
+    sparse: true,
+  },
+  purchased: {
+    type: [String],
     default: [],
     sparse: true,
   },

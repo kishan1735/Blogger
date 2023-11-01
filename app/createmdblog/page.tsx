@@ -9,8 +9,8 @@ function Page() {
   const [text, setText] = useState("");
   const [name, setName] = useState("");
   const [content, setContent] = useState<any>();
-  async function handleClick() {
-    const requestBody = { name, content };
+  async function handleClick(plan: string) {
+    const requestBody = { name, content, plan };
 
     const res = await fetch("/api/blogs", {
       method: "POST",
@@ -33,15 +33,6 @@ function Page() {
     <AuthCheck>
       <div className="h-full flex flex-col space-y-6 w-screen bg-black opacity-[85%] pb-4">
         <Nav />
-        <Head>
-          <title>Blogger Markdown Editor</title>
-          <meta
-            name="description"
-            content="Write blogs in markdown syntax to level up your productivity."
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-
         <main
           className={`bg-black opacity-80 px-10 text-2xl min-h-screen flex flex-col gap-2`}
         >
@@ -61,10 +52,16 @@ function Page() {
           </div>
         </main>
         <button
-          className="bg-primary mx-auto py-4 text-2xl w-[20vw] border-black border-2 hover:bg-black hover:border-primary hover:text-primary"
-          onClick={handleClick}
+          className="bg-primary mx-auto py-4 text-2xl w-[40vw] border-black border-2 hover:bg-black hover:border-primary hover:text-primary"
+          onClick={() => handleClick("premium")}
         >
-          Submit
+          Post as Premium Content
+        </button>
+        <button
+          className="bg-primary mx-auto py-4 text-2xl w-[40vw] border-black border-2 hover:bg-black hover:border-primary hover:text-primary"
+          onClick={() => handleClick("normal")}
+        >
+          Post as Free Content
         </button>
       </div>
     </AuthCheck>

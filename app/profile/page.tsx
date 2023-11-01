@@ -21,7 +21,7 @@ function Wallet() {
       <div
         className={`${
           transaction ? "h-full pb-[4vh] w-screen" : "h-screen"
-        } flex flex-col bg-black opacity-90 items-center `}
+        } flex flex-col bg-black opacity-[85%] items-center `}
       >
         <Nav />
         <div className="border-t-2 w-screen border-primary mb-[10vh]"></div>

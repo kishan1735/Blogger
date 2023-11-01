@@ -27,7 +27,11 @@ function Page() {
   );
   return (
     <AuthCheck>
-      <div className="h-screen bg-black opacity-[85%] flex flex-col space-y-4">
+      <div
+        className={`${
+          data.length <= 8 ? "h-screen" : "h-full"
+        } bg-black opacity-[85%] flex flex-col space-y-4`}
+      >
         <SearchNav search={search} setSearch={setSearch} border={true} />
         <div className="grid grid-cols-4 gap-4 p-2">
           {data?.map((el: any) => {
@@ -40,11 +44,21 @@ function Page() {
                 }}
               >
                 <h1 className="text-primary text-xl text-center">{el.name}</h1>
+
                 <h1 className="text-accent text-sm text-center">
                   {el.time.toString().split("G")[0]}
                 </h1>
                 <h1 className="text-secondary text-sm text-center">
                   {el.content.substring(0, 60)}
+                </h1>
+                <h1 className="text-lg text-center">
+                  <p
+                    className={`${
+                      el.plan === "premium" ? "text-green-500" : "text-accent"
+                    }`}
+                  >
+                    {el.plan == "premium" ? "premium" : "free"}
+                  </p>
                 </h1>
               </div>
             );
