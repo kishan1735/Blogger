@@ -13,7 +13,7 @@ function Nav() {
         Blogger
       </Link>
       <div className="flex items-center space-x-4">
-        <Link href="/createblog" className=" group text-primary">
+        <Link href="/createmdblog" className=" group text-primary">
           <h1 className="text-2xl">Create Blog</h1>
           <div className="mx-2 group-hover:border-b-2 group-hover:border-primary"></div>
         </Link>
