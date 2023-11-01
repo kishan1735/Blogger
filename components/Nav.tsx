@@ -8,7 +8,7 @@ function Nav() {
     <nav className="max-w-kxl px-6 py-4 bg-black flex justify-between opacity-90 items-center w-screen">
       <Link
         href="/"
-        className="text-black bg-accent px-2  text-2xl hover:scale-105 duration-400"
+        className="text-black bg-accent px-2  text-3xl hover:scale-105 duration-400"
       >
         Blogger
       </Link>
@@ -31,7 +31,7 @@ function Nav() {
         </Link>
         {status !== "authenticated" ? (
           <button
-            className="bg-primary border-2 border-primary text-black py-2 px-3 hover:bg-background hover:border-2 hover:border-black"
+            className="bg-primary border-2 border-primary text-black py-2 px-3 hover:bg-black hover:border-2 hover:border-primary hover:text-primary text-xl"
             onClick={() =>
               signIn(
                 "google",
@@ -44,7 +44,7 @@ function Nav() {
           </button>
         ) : (
           <button
-            className="bg-primary border-2 border-primary text-black py-2 px-3 hover:bg-background hover:border-2 hover:border-black"
+            className="bg-primary border-2 border-primary text-black py-2 px-3 hover:bg-black hover:border-2 hover:border-primary hover:text-primary text-xl"
             onClick={() => signOut()}
           >
             Sign Out

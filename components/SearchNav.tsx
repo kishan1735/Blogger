@@ -20,7 +20,7 @@ function SearchNav({
     >
       <Link
         href="/"
-        className="text-black bg-accent px-2  text-2xl hover:scale-105"
+        className="text-black bg-accent px-2  text-3xl hover:scale-105"
       >
         Blogger
       </Link>
@@ -50,7 +50,7 @@ function SearchNav({
         </Link>
         {status !== "authenticated" ? (
           <button
-            className="bg-primary border-2 border-primary text-black py-2 px-3 hover:bg-black hover:border-2 hover:border-primary hover:text-primary"
+            className="bg-primary border-2 border-primary text-black py-2 px-3 hover:bg-black hover:border-2 hover:border-primary hover:text-primary text-xl"
             onClick={() =>
               signIn(
                 "google",
@@ -63,7 +63,7 @@ function SearchNav({
           </button>
         ) : (
           <button
-            className="bg-primary border-2 border-primary text-black py-2 px-3 hover:bg-black hover:border-2 hover:border-primary hover:text-primary"
+            className="bg-primary border-2 border-primary text-black py-2 px-3 hover:bg-black hover:border-2 hover:border-primary hover:text-primary text-xl"
             onClick={() => signOut()}
           >
             Sign Out
