@@ -64,7 +64,7 @@ function Page() {
         <div
           className={`bg-black opacity-[85%] ${
             purchased ? "h-full" : "h-screen"
-          } pb-4 flex flex-col items-center w-screen`}
+          } min-h-screen pb-4 flex flex-col items-center w-screen`}
         >
           <Nav />
           <div className="border-t-2 w-screen border-primary mb-4"></div>

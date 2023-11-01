@@ -41,7 +41,7 @@ function Page() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="h-full flex flex-col space-y-6 w-screen bg-black opacity-[85%] pb-4">
+        <div className="h-full min-h-screen flex flex-col space-y-6 w-screen bg-black opacity-[85%] pb-4">
           <Nav />
           <main
             className={`bg-black opacity-80 px-10 text-2xl min-h-screen flex flex-col gap-2`}

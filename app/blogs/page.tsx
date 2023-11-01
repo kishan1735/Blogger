@@ -41,7 +41,7 @@ function Page() {
       <div
         className={`${
           data.length <= 8 ? "h-screen" : "h-full"
-        } bg-black opacity-[85%] flex flex-col space-y-4`}
+        } min-h-screen bg-black opacity-[85%] flex flex-col space-y-4`}
       >
         <SearchNav search={search} setSearch={setSearch} border={true} />
         <h1 className="text-primary text-lg text-center">{error}</h1>

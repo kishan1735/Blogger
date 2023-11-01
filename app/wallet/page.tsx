@@ -54,7 +54,7 @@ function Page() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="h-screen max-w-kxl w-screen flex flex-col items-center bg-black opacity-[85%] ">
+        <div className="h-screen min-h-screen max-w-kxl w-screen flex flex-col items-center bg-black opacity-[85%] ">
           <Nav />
           <div className="border-t-2 w-screen border-primary mb-[10vh]"></div>
           <div className=" bg-black border-2 border-primary w-[50vw] opacity-90 flex-col px-8  py-[8vh] space-y-8">
