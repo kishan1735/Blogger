@@ -52,7 +52,7 @@ function Page() {
             data?.map((el: any) => {
               return (
                 <div
-                  className="bg-black border-2 border-primary px-2 py-4 flex flex-col space-y-2 hover:scale-105 cursor-pointer"
+                  className="bg-black border-2 border-primary px-[2vh] py-[4vh] flex flex-col space-y-2 hover:scale-105 cursor-pointer"
                   key={el._id}
                   onClick={() => {
                     router.push(`/blogs/${el._id}`);
