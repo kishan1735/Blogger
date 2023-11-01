@@ -31,7 +31,7 @@ function Page() {
 
   return (
     <AuthCheck>
-      <div className="h-full flex flex-col space-y-6 w-screen bg-black opacity-90 pb-4">
+      <div className="h-full flex flex-col space-y-6 w-screen bg-black opacity-[85%] pb-4">
         <Nav />
         <Head>
           <title>Blogger Markdown Editor</title>

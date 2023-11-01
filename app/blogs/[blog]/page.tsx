@@ -35,7 +35,7 @@ function Page() {
           <h2 className="text-secondary">
             {blog?.time.toString().split("GMT")[0]}
           </h2>
-          <h2 className="text-primary">- {user?.name}</h2>
+          <h2 className="text-primary text-xl">- {user?.name}</h2>
           <Preview doc={blog?.content}></Preview>
         </div>
       </div>
