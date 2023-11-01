@@ -9,7 +9,7 @@ const cors = Cors({
 });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-async function getCheckoutSession(req: Request): Promise<any> {
+export async function POST(req: Request): Promise<any> {
   try {
     const session = await getServerSession();
     const data = await req.json();
@@ -45,5 +45,3 @@ async function getCheckoutSession(req: Request): Promise<any> {
     return NextResponse.json({ status: "failed", message: err.message });
   }
 }
-
-export { getCheckoutSession as POST };

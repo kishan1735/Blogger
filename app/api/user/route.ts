@@ -5,7 +5,7 @@ import { getSession } from "next-auth/react";
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 
-async function handleGet(req: Request) {
+export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);
     await connectMongoDB();
@@ -18,5 +18,3 @@ async function handleGet(req: Request) {
     return NextResponse.json({ status: "failed", message: err.message });
   }
 }
-
-export { handleGet as GET };

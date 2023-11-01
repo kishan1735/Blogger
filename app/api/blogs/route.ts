@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import User from "@/models/userModel";
 import connectMongoDB from "@/lib/dbConnect";
 
-async function handlerPost(req: Request): Promise<any> {
+export async function POST(req: Request): Promise<any> {
   try {
     const session = await getServerSession(authOptions);
     const data = await req.json();
@@ -31,7 +31,7 @@ async function handlerPost(req: Request): Promise<any> {
   }
 }
 
-async function handlerPatch(req: Request) {
+export async function PATCH(req: Request) {
   try {
     await connectMongoDB();
     let blogs: any;
@@ -48,5 +48,3 @@ async function handlerPatch(req: Request) {
     return NextResponse.json({ status: "failed", message: err.message });
   }
 }
-
-export { handlerPost as POST, handlerPatch as PATCH };

@@ -5,7 +5,7 @@ import Pay from "@/models/payModel";
 import User from "@/models/userModel";
 import { NextApiRequest } from "next";
 
-async function createPayCheckout(req: Request, { params }: { params: any }) {
+export async function GET(req: Request, { params }: { params: any }) {
   try {
     const session = await getServerSession(authOptions);
     let user = await User.findOne({ email: session?.user?.email });
@@ -33,5 +33,3 @@ async function createPayCheckout(req: Request, { params }: { params: any }) {
     return NextResponse.json({ status: "failed", message: err.message });
   }
 }
-
-export { createPayCheckout as GET };

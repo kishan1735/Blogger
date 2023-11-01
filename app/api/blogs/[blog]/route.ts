@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import connectMongoDB from "@/lib/dbConnect";
 
-async function GetHandler(req: Request, { params }: { params: any }) {
+export async function GET(req: Request, { params }: { params: any }) {
   try {
     await connectMongoDB();
     const session = await getServerSession(authOptions);
@@ -63,5 +63,3 @@ async function GetHandler(req: Request, { params }: { params: any }) {
     return NextResponse.json({ status: "failed", message: err.message });
   }
 }
-
-export { GetHandler as GET };
