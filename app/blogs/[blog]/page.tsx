@@ -1,4 +1,5 @@
 "use client";
+import AuthCheck from "@/components/AuthCheck";
 import Nav from "@/components/Nav";
 import Preview from "@/components/markdowneditor/Preview";
 import { useParams } from "next/navigation";
@@ -25,18 +26,20 @@ function Page() {
   );
 
   return (
-    <div className="bg-black opacity-80 h-full pb-4 flex flex-col items-center space-y-4 w-screen">
-      <Nav />
-      <div className="border-t-2 w-screen border-primary"></div>
-      <div className="bg-black py-8 px-16 flex flex-col items-center space-y-4 w-[50vw] mx-28">
-        <h1 className="text-primary text-3xl">{blog?.name}</h1>
-        <h2 className="text-secondary">
-          {Date(blog?.time).toString().split("GMT")[0]}
-        </h2>
-        <h2 className="text-primary">- {user?.name}</h2>
-        <Preview doc={blog?.content}></Preview>
+    <AuthCheck>
+      <div className="bg-black opacity-[85%] h-full pb-4 flex flex-col items-center w-screen">
+        <Nav />
+        <div className="border-t-2 w-screen border-primary mb-4"></div>
+        <div className="bg-black py-8 px-16 flex flex-col items-center space-y-4 w-[50vw] mx-28">
+          <h1 className="text-primary text-3xl">{blog?.name}</h1>
+          <h2 className="text-secondary">
+            {blog?.time.toString().split("GMT")[0]}
+          </h2>
+          <h2 className="text-primary">- {user?.name}</h2>
+          <Preview doc={blog?.content}></Preview>
+        </div>
       </div>
-    </div>
+    </AuthCheck>
   );
 }
 

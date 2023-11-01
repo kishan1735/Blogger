@@ -6,7 +6,7 @@ function Nav() {
   const { data: session, status } = useSession();
   return (
     <nav
-      className={`px-6 py-4 h-[15vh] bg-black flex justify-between opacity-90 items-center`}
+      className={`px-6 py-4 w-screen h-[15vh] bg-black flex justify-between opacity-90 items-center`}
     >
       <Link
         href="/"

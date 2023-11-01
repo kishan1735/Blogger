@@ -1,4 +1,5 @@
 "use client";
+import AuthCheck from "@/components/AuthCheck";
 import Nav from "@/components/Nav";
 import SearchNav from "@/components/SearchNav";
 import { useRouter } from "next/navigation";
@@ -25,30 +26,32 @@ function Page() {
     [search]
   );
   return (
-    <div className="h-screen bg-secondary flex flex-col space-y-4">
-      <SearchNav search={search} setSearch={setSearch} />
-      <div className="grid grid-cols-4 gap-4 p-2">
-        {data?.map((el: any) => {
-          return (
-            <div
-              className="bg-black px-2 py-4 flex flex-col space-y-2 hover:scale-105 cursor-pointer"
-              key={el._id}
-              onClick={() => {
-                router.push(`/blogs/${el._id}`);
-              }}
-            >
-              <h1 className="text-primary text-xl text-center">{el.name}</h1>
-              <h1 className="text-accent text-sm text-center">
-                {el.time.toString().split("G")[0]}
-              </h1>
-              <h1 className="text-secondary text-sm text-center">
-                {el.content.substring(0, 80)}
-              </h1>
-            </div>
-          );
-        })}
+    <AuthCheck>
+      <div className="h-screen bg-black opacity-[85%] flex flex-col space-y-4">
+        <SearchNav search={search} setSearch={setSearch} border={true} />
+        <div className="grid grid-cols-4 gap-4 p-2">
+          {data?.map((el: any) => {
+            return (
+              <div
+                className="bg-black border-2 border-primary px-2 py-4 flex flex-col space-y-2 hover:scale-105 cursor-pointer"
+                key={el._id}
+                onClick={() => {
+                  router.push(`/blogs/${el._id}`);
+                }}
+              >
+                <h1 className="text-primary text-xl text-center">{el.name}</h1>
+                <h1 className="text-accent text-sm text-center">
+                  {el.time.toString().split("G")[0]}
+                </h1>
+                <h1 className="text-secondary text-sm text-center">
+                  {el.content.substring(0, 60)}
+                </h1>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </AuthCheck>
   );
 }
 
