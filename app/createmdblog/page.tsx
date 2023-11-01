@@ -27,30 +27,30 @@ function Page() {
   }, []);
 
   return (
-    <div className="h-full  bg-secondary flex flex-col space-y-6 w-screen pb-2">
+    <div className="h-full flex flex-col space-y-6 w-screen bg-black opacity-80 pb-4">
       <Nav />
       <Head>
-        <title>Nextjs Markdown Editor</title>
+        <title>Blogger Markdown Editor</title>
         <meta
           name="description"
-          content="Write notes in markdown syntax to level up your productivity."
+          content="Write blogs in markdown syntax to level up your productivity."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main
-        className={`bg-secondary px-10 text-2xl min-h-screen flex flex-col gap-2`}
+        className={`bg-black opacity-80 px-10 text-2xl min-h-screen flex flex-col gap-2`}
       >
         <div className="flex space-x-6 justify-center">
-          <h1 className="text-primary text-2xl">Name</h1>
+          <h1 className="text-primary text-3xl">Name</h1>
           <input
             type="text"
-            className="bg-primary px-10"
+            className="bg-primary px-10 py-1"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <h1 className={`text-primary text-2xlflex-0`}>Markdown Editor</h1>
+        <h1 className={`text-primary text-3xl flex-0`}>Markdown Editor</h1>
         <div className="flex flex-1 w-full gap-4">
           <Editor initialDoc={text} onChange={handleDocChange} />
           <Preview doc={text} />
