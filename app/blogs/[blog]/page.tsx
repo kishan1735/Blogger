@@ -25,14 +25,15 @@ function Page() {
   );
 
   return (
-    <div className="bg-secondary h-screen flex flex-col items-center space-y-4">
+    <div className="bg-black opacity-80 h-full pb-4 flex flex-col items-center space-y-4 w-screen">
       <Nav />
-      <div className="bg-black py-8 px-16 flex flex-col items-center space-y-2 mx-28">
-        <h1 className="text-secondary text-xl">{blog?.name}</h1>
-        <h2 className="text-accent">
+      <div className="border-t-2 w-screen border-primary"></div>
+      <div className="bg-black py-8 px-16 flex flex-col items-center space-y-4 w-[50vw] mx-28">
+        <h1 className="text-primary text-3xl">{blog?.name}</h1>
+        <h2 className="text-secondary">
           {Date(blog?.time).toString().split("GMT")[0]}
         </h2>
-        <h2 className="text-secondary">- {user?.name}</h2>
+        <h2 className="text-primary">- {user?.name}</h2>
         <Preview doc={blog?.content}></Preview>
       </div>
     </div>
