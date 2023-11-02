@@ -48,3 +48,43 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ status: "failed", message: err.message });
   }
 }
+
+export async function GET() {
+  try {
+    await connectMongoDB();
+    let blogs: any;
+
+    let one_hour_ago = new Date(Date.now() - 60 * 60 * 1000);
+    blogs = await Blog.aggregate([
+      {
+        $project: {
+          name: "$name",
+          publisher: "$publisher",
+          time: "$time",
+          content: "$content",
+          plan: "$plan",
+          recentViewCount: {
+            $size: {
+              $filter: {
+                input: "$views",
+                as: "item",
+                cond: {
+                  $gte: ["$$item.time", one_hour_ago],
+                },
+              },
+            },
+          },
+        },
+      },
+      {
+        $sort: { recentViewCount: -1, _id: 1 },
+      },
+    ]).exec();
+    if (blogs.length == 0) {
+      throw new Error("Blogs Not Found");
+    }
+    return NextResponse.json({ status: "success", blogs });
+  } catch (err: any) {
+    return NextResponse.json({ status: "failed", message: err.message });
+  }
+}

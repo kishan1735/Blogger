@@ -2,9 +2,8 @@
 import AuthCheck from "@/components/AuthCheck";
 import BlogsTab from "@/components/BlogCard";
 import ComponentLoading from "@/components/ComponentLoading";
-import Loading from "@/components/Loading";
-import Nav from "@/components/Nav";
 import SearchNav from "@/components/SearchNav";
+import { Blog } from "@/models/blogModel";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -14,6 +13,12 @@ function Page() {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
   const [error, setError] = useState("s");
+
+  const [trend_loading, trendSetLoading] = useState(false);
+  const [trend_search, trendSetSearch] = useState("");
+  const [trend_data, trendSetData] = useState([]);
+  const [trend_error, trendSetError] = useState("s");
+
   useEffect(
     function () {
       async function getAllBlogs() {
@@ -33,6 +38,22 @@ function Page() {
         } else setError(resData.message);
         console.log(resData);
       }
+      async function getTrendingBlogs() {
+        trendSetLoading(true);
+        trendSetError("");
+        const res = await fetch("/api/blogs", {
+          method: "GET",
+        });
+        const resData = await res.json();
+        if (resData.status === "success") {
+          trendSetLoading(false);
+          trendSetData(resData.blogs);
+        } else trendSetError(resData.message);
+        console.log(" trending blogs");
+        console.log(resData);
+      }
+      getTrendingBlogs();
+
       getAllBlogs();
     },
     [search]
@@ -52,6 +73,14 @@ function Page() {
             <ComponentLoading />
           ) : (
             <BlogsTab data={data} router={router}></BlogsTab>
+          )}
+        </div>
+        <h1 className="text-primary text-lg text-center">Trending</h1>
+        <div className="grid grid-cols-4 gap-4 p-2">
+          {trend_loading ? (
+            <ComponentLoading />
+          ) : (
+            <BlogsTab data={trend_data} router={router}></BlogsTab>
           )}
         </div>
       </div>
