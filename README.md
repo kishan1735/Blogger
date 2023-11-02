@@ -8,7 +8,7 @@ This is a [Next.js](https://nextjs.org/) project
 - Stripe
 
 ## Getting Started
-
+NOTE in development typescript takes time to compile so a lag will be experienced when u run for the first time unlike in production mode
 ### For Windows users- it is important to have WSL installed
 
 Run Redis on WSL using - redis-server redis.conf ( Make sure no redis servers are running in the background )
