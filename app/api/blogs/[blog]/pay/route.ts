@@ -51,7 +51,11 @@ async function handlePay(req: Request, { params }: { params: any }) {
       { email: session?.user?.email },
       {
         walletBalance: user.walletBalance - 2,
-        $push: { purchased: blog._id.toString() },
+        $push: {
+          purchased: blog._id.toString(),
+
+          transactionHistory: { for: "blog", amount: -2, time: Date.now() },
+        },
       }
     );
     user = await User.findById(user._id);
