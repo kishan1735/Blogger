@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
 
 interface BlogType extends mongoose.Document {
-  name: String;
+  name: string;
   publisher: string;
   time: Date;
-  content: String;
-  plan: String;
+  content: string;
+  plan: string;
   views: Array<Object>;
+  tags: Array<string>;
 }
 
 const viewSchema = new mongoose.Schema({
@@ -44,6 +45,10 @@ const blogSchema = new mongoose.Schema<BlogType>({
   views: {
     type: [viewSchema],
     sparse: true,
+    default: [],
+  },
+  tags: {
+    type: [String],
     default: [],
   },
 });

@@ -4,17 +4,20 @@ import Loading from "@/components/Loading";
 import Nav from "@/components/Nav";
 import Preview from "@/components/markdowneditor/Preview";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 function Page() {
+  const params = useParams();
+  const router = useRouter();
   const [blog, setBlog] = useState<any>();
   const [user, setUser] = useState<any>();
   const [purchased, setPurchased] = useState(false);
   const [proceed, setProceed] = useState(false);
   const [author, setAuthor] = useState<any>();
-  const params = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [owner, setOwner] = useState(false);
 
   useEffect(
     function () {
@@ -27,6 +30,9 @@ function Page() {
         const data = await res.json();
         setLoading(false);
         if (data.status === "success") {
+          if (data.owner) {
+            setOwner(true);
+          }
           if (data.purchased) {
             setPurchased(true);
           }
@@ -55,7 +61,18 @@ function Page() {
       setError(data.message);
     }
   }
-  console.log(purchased);
+  async function handleDelete() {
+    const res = await fetch(`/api/blogs/${params.blog}`, {
+      method: "DELETE",
+      headers: { "Content-type": "application/json" },
+    });
+    const data = await res.json();
+    if (data.status == "failed") {
+      setError(data.message);
+    } else {
+      router.push(`/blogs`);
+    }
+  }
   return (
     <AuthCheck>
       {loading ? (
@@ -78,6 +95,16 @@ function Page() {
               <h2 className="text-primary text-2xl">- {author?.name}</h2>
               <h1 className="text-primary text-lg text-center">{error}</h1>
               <Preview doc={blog?.content}></Preview>
+              {owner ? (
+                <button
+                  className="bg-primary border-black border-2 hover:bg-black hover:border-primary hover:text-primary py-[2vh] text-2xl w-[30vw]"
+                  onClick={handleDelete}
+                >
+                  Delete Blog
+                </button>
+              ) : (
+                ""
+              )}
             </div>
           ) : (
             <div className="border-2 border-primary mt-[12vh] px-[10vw] py-[6vh] text-center flex flex-col space-y-[2vh] items-center">

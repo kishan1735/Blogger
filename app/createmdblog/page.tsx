@@ -63,6 +63,9 @@ function Page() {
               <Preview doc={content} />
             </div>
           </main>
+          <div className="border-primary border-2 mx-auto px-[4vw] py-[4vh]">
+            <h1 className="text-accent text-3xl">Add Tags</h1>
+          </div>
           <button
             className="bg-primary mx-auto py-4 text-2xl w-[40vw] border-black border-2 hover:bg-black hover:border-primary hover:text-primary"
             onClick={() => handleClick("premium")}
