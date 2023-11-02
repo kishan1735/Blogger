@@ -1,47 +1,32 @@
-import Blog from "@/models/blogModel";
-import User from "@/models/userModel";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
-import { authOptions } from "../../auth/[...nextauth]/route";
-import connectMongoDB from "@/lib/dbConnect";
-import { redisClient } from "@/utils/redis";
-
 export async function GET(req: Request, { params }: { params: any }) {
+  let cacheBlog = params.blog;
   let blog;
   let user;
-  let cachedBlog = params.blog;
+  let author;
   try {
     await connectMongoDB();
     const session = await getServerSession(authOptions);
-
-    let userCache = session?.user?.email;
-    let blogCache = params.blog;
-
-    await connectMongoDB();
-    const cachedUser = await redisClient.get("User :" + userCache);
-    if (cachedUser !== "null" && cachedUser !== null) {
-      user = await JSON.parse(cachedUser);
-    } else {
-      user = await User.findOne({ email: session?.user?.email });
-      await redisClient.set("User :" + userCache, JSON.stringify(user));
-      await redisClient.expire("User :" + userCache, 1200);
-    }
-
-    if (!user) {
-      throw new Error("User not found");
-    }
-    const cachedBlog = await redisClient.get("Blog :" + blogCache);
-    if (cachedBlog !== null && cachedBlog !== "null") {
+    let cacheUser = session?.user?.email;
+    const cachedUser: any = await redisClient.get("User :" + cacheUser);
+    const cachedBlog = await redisClient.get("Blog :" + cacheBlog);
+    if (
+      cachedBlog !== "null" &&
+      cachedBlog !== null &&
+      cachedUser !== "null" &&
+      cachedUser !== null
+    ) {
       blog = JSON.parse(cachedBlog);
+      user = JSON.parse(cachedUser);
+      author = await User.findById(blog.publisher.toString());
     } else {
       blog = await Blog.findById(params.blog);
-      await redisClient.set("Blog :" + blogCache, JSON.stringify(blog));
-      await redisClient.expire("Blog :" + blogCache, 1200);
+      author = await User.findById(blog.publisher.toString());
+      user = await User.findOne({ email: session?.user?.email });
     }
+
     if (!blog) {
       throw new Error("Blog Not Found");
     }
-    const author = await User.findById(blog.publisher.toString());
 
     blog = await Blog.findByIdAndUpdate(params.blog, {
       $push: {
@@ -52,8 +37,10 @@ export async function GET(req: Request, { params }: { params: any }) {
       },
     });
     blog = await Blog.findById(params.blog);
-    await redisClient.set("Blog :" + blogCache, JSON.stringify(blog));
-    await redisClient.expire("Blog :" + blogCache, 1200);
+    await redisClient.set("Blog :" + cacheBlog, blog);
+    if (!user) {
+      throw new Error("User not found");
+    }
     if (blog.plan == "normal" && user._id.toString() == author._id.toString()) {
       return NextResponse.json({
         status: "success",
@@ -109,19 +96,15 @@ export async function DELETE(req: Request, { params }: { params: any }) {
   try {
     await connectMongoDB();
     const session = await getServerSession(authOptions);
-    let userCache = session?.user?.email;
     const blog = await Blog.findByIdAndDelete(params.blog);
     if (!blog) {
       throw new Error("Blog not found");
     }
-    await redisClient.flushDb();
-    let user = await User.findOneAndUpdate(
+    const user = await User.findOneAndUpdate(
       { email: session?.user?.email },
       { $pull: { blogs: params.blog } }
     );
-    user = await User.findOne({ email: session?.user?.email });
-    await redisClient.set("User :" + userCache, JSON.stringify(user));
-    await redisClient.expire("User :" + userCache, 1200);
+
     return NextResponse.json({
       status: "success",
       message: "Successfully deleted",

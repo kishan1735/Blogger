@@ -4,12 +4,25 @@ import { authOptions } from "../auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
 import User from "@/models/userModel";
 import connectMongoDB from "@/lib/dbConnect";
+import { redisClient } from "@/utils/redis";
 
 export async function POST(req: Request): Promise<any> {
+  let user: any;
   try {
     const session = await getServerSession(authOptions);
     const data = await req.json();
-    let user: any = await User.findOne({ email: session?.user?.email });
+    let userCache = session?.user?.email;
+    await connectMongoDB();
+
+    const cachedUser = await redisClient.get("User :" + userCache);
+    if (cachedUser !== "null" && cachedUser !== null) {
+      user = await JSON.parse(cachedUser);
+    } else {
+      user = await User.findOne({ email: session?.user?.email });
+      await redisClient.set("User :" + userCache, JSON.stringify(user));
+      await redisClient.expire("User :" + userCache, 1200);
+    }
+
     if (!user) {
       throw new Error("User not found");
     }
@@ -25,7 +38,9 @@ export async function POST(req: Request): Promise<any> {
       { email: session?.user?.email },
       { $push: { blogs: blog._id } }
     );
-    // const tags = await User.findOneAndUpdate({});
+    user = await User.findById(user._id);
+    await redisClient.set("User :" + userCache, JSON.stringify(user));
+    await redisClient.expire("User :" + userCache, 1200);
     return NextResponse.json({ status: "success", blog });
   } catch (err: any) {
     console.log(err);

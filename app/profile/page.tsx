@@ -4,7 +4,7 @@ import Loading from "@/components/Loading";
 import Nav from "@/components/Nav";
 import { useEffect, useState } from "react";
 
-function Wallet() {
+function Profile() {
   const [user, setUser] = useState<any>();
   const [transaction, setTransaction] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
@@ -101,4 +101,4 @@ function Wallet() {
   );
 }
 
-export default Wallet;
+export default Profile;
