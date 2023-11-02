@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function BlogsTab({ data, router }: { data: any; router: any }) {
+  // console.log(data[0].tags);
   return (
     <>
       {data?.map((el: any) => {
@@ -38,6 +39,13 @@ export default function BlogsTab({ data, router }: { data: any; router: any }) {
                 {el.plan == "premium" ? "premium" : "free"}
               </p>
             </h1>
+            {/* <h1 className="text-secondary text-sm text-center">
+              {el?.tabs?.length == 0
+                ? ""
+                : el.tabs.map((el: any) => {
+                    return <div key={el}>{el}</div>;
+                  })}
+            </h1> */}
           </div>
         );
       })}

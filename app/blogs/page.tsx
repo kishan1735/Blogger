@@ -62,7 +62,7 @@ function Page() {
     <AuthCheck>
       <div
         className={`${
-          data.length <= 8 ? "h-screen" : "h-full"
+          data.length <= 4 ? "h-screen" : "h-full"
         } min-h-screen bg-black opacity-[85%] flex flex-col space-y-4`}
       >
         <SearchNav search={search} setSearch={setSearch} border={true} />
@@ -74,7 +74,9 @@ function Page() {
             <BlogsTab data={data} router={router}></BlogsTab>
           )}
         </div>
-        <h1 className="text-primary text-lg text-center">Trending</h1>
+        <h1 className="text-green-600 text-3xl uppercase text-center">
+          Trending
+        </h1>
         <div className="grid grid-cols-4 gap-4 p-2">
           {trend_loading ? (
             <ComponentLoading />

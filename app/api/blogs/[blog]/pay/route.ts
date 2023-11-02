@@ -39,6 +39,9 @@ async function handlePay(req: Request, { params }: { params: any }) {
     if (!blog) {
       throw new Error("Blog Not Found");
     }
+    if (user.walletBalance <= 1) {
+      throw new Error("Wallet Balance Inadequate");
+    }
     const pay = await Pay.create({
       amount: -2,
       time: Date.now(),
