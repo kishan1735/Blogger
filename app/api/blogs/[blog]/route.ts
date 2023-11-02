@@ -38,6 +38,7 @@ export async function GET(req: Request, { params }: { params: any }) {
       return NextResponse.json({
         status: "success",
         purchased: true,
+        owner: true,
         blog,
         author,
         user,
@@ -46,6 +47,7 @@ export async function GET(req: Request, { params }: { params: any }) {
       return NextResponse.json({
         status: "success",
         purchased: true,
+        owner: false,
         blog,
         author,
         user,
@@ -54,6 +56,7 @@ export async function GET(req: Request, { params }: { params: any }) {
       return NextResponse.json({
         status: "success",
         purchased: false,
+        owner: false,
         blog,
         author,
         user,

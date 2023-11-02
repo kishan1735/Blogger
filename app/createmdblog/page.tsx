@@ -12,6 +12,7 @@ function Page() {
   const [content, setContent] = useState<any>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
   async function handleClick(plan: string) {
     const requestBody = { name, content, plan };
     setLoading(true);
