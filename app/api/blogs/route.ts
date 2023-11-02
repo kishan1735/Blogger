@@ -19,11 +19,13 @@ export async function POST(req: Request): Promise<any> {
       time: new Date(Date.now()),
       plan: data.plan || "normal",
       content: data.content,
+      tags: data.tags,
     });
     user = await User.findOneAndUpdate(
       { email: session?.user?.email },
       { $push: { blogs: blog._id } }
     );
+    // const tags = await User.findOneAndUpdate({});
     return NextResponse.json({ status: "success", blog });
   } catch (err: any) {
     console.log(err);
