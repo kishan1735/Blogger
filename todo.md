@@ -2,13 +2,13 @@
 
 ## Features
 
-- trending algorthim ( front page trending posts)
+- [x] trending algorthim ( front page trending posts)
 
-- catagories
-- View post delails and analytics page :
-  - should have graph
-  - delete option
-  - edit option
+- [ ]catagories
+- [ ]View post delails and analytics page :
+  - [ ]should have graph
+  - [x] delete option
+  - [ ] edit option
 - caching edit blog page
 
 ## high hope
