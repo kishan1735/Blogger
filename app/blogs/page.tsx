@@ -3,7 +3,7 @@ import AuthCheck from "@/components/AuthCheck";
 import BlogsTab from "@/components/BlogCard";
 import ComponentLoading from "@/components/ComponentLoading";
 import SearchNav from "@/components/SearchNav";
-import { Blog } from "@/models/blogModel";
+import Blog from "@/models/blogModel";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -15,7 +15,6 @@ function Page() {
   const [error, setError] = useState("s");
 
   const [trend_loading, trendSetLoading] = useState(false);
-  const [trend_search, trendSetSearch] = useState("");
   const [trend_data, trendSetData] = useState([]);
   const [trend_error, trendSetError] = useState("s");
 
